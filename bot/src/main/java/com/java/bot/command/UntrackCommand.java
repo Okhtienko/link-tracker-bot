@@ -6,7 +6,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Untrack implements Command {
+public class UntrackCommand implements Command {
 
     private static final String NAME = "/untrack";
     private static final String DESCRIPTION = "untracks links";

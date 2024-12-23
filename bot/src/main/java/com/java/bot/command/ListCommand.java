@@ -6,7 +6,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class List implements Command {
+public class ListCommand implements Command {
 
     private static final String NAME = "/list";
     private static final String DESCRIPTION = "displays list of tracked references";

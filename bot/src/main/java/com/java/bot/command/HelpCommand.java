@@ -6,7 +6,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Help implements Command {
+public class HelpCommand implements Command {
 
     private static final String NAME = "/help";
     private static final String DESCRIPTION = "displays a command window";

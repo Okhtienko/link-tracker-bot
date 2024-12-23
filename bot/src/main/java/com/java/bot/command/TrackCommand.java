@@ -6,7 +6,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Track implements Command {
+public class TrackCommand implements Command {
 
     private static final String NAME = "/track";
     private static final String DESCRIPTION = "tracks links";

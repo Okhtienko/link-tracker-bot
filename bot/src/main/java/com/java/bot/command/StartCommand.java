@@ -23,6 +23,8 @@ public class StartCommand implements Command {
 
     @Override
     public SendMessage handle(Update update) {
+        Long id = update.message().chat().id();
+        Long userId = update.message().from().id();
         return null;
     }
 }
