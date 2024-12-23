@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class MapConfig {
+public class RegistryConfig {
 
     @Bean
     public Map<String, Command> commandMap(List<Command> commands) {
