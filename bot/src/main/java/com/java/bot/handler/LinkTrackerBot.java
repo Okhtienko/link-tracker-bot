@@ -1,7 +1,5 @@
 package com.java.bot.handler;
 
-import java.util.Objects;
-import java.util.List;
 import com.java.bot.configuration.ApplicationConfig;
 import com.java.bot.processor.Bot;
 import com.pengrad.telegrambot.TelegramBot;
@@ -9,7 +7,10 @@ import com.pengrad.telegrambot.TelegramException;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.BaseRequest;
+import com.pengrad.telegrambot.request.SetMyCommands;
 import com.pengrad.telegrambot.response.BaseResponse;
+import java.util.List;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,9 +23,10 @@ public class LinkTrackerBot implements Bot {
     private final MessageProcessorHandler messageProcessorHandler;
 
     @Autowired
-    public LinkTrackerBot(ApplicationConfig config, MessageProcessorHandler messageProcessorHandler) {
+    public LinkTrackerBot(ApplicationConfig config, MessageProcessorHandler messageProcessorHandler, MenuHandler menu) {
         this.messageProcessorHandler = messageProcessorHandler;
         this.telegramBot = new TelegramBot(config.telegramToken());
+        telegramBot.execute(new SetMyCommands(menu.gets()));
     }
 
     @Override
