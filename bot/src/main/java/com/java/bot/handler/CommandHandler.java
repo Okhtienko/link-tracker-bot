@@ -2,9 +2,9 @@ package com.java.bot.handler;
 
 import com.java.bot.processor.Command;
 import com.java.bot.processor.CommandProcessor;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
