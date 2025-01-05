@@ -1,6 +1,6 @@
 package com.java.bot.configuration;
 
-import com.java.bot.processor.Command;
+import com.java.bot.bot.Command;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
