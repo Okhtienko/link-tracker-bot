@@ -1,4 +1,4 @@
-package com.java.bot.processor;
+package com.java.bot.bot;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
