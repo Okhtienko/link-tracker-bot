@@ -1,6 +1,6 @@
 package com.java.bot.handler;
 
-import com.java.bot.processor.Command;
+import com.java.bot.bot.Command;
 import com.pengrad.telegrambot.model.BotCommand;
 import org.springframework.stereotype.Component;
 
