@@ -1,7 +1,7 @@
 package com.java.bot.handler;
 
+import com.java.bot.bot.Bot;
 import com.java.bot.configuration.ApplicationConfig;
-import com.java.bot.processor.Bot;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.TelegramException;
 import com.pengrad.telegrambot.UpdatesListener;
@@ -18,6 +18,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class LinkTrackerBot implements Bot {
+
+    private static final String NETWORK_ERROR = "Network error: {}";
+    private static final String TELEGRAM_ERROR = "Telegram error: {} - {}";
 
     private final TelegramBot telegramBot;
     private final MessageProcessorHandler messageProcessorHandler;
@@ -58,9 +61,9 @@ public class LinkTrackerBot implements Bot {
 
     private void handleError(TelegramException exception) {
         if (exception.response() != null) {
-            log.error("Telegram error: {} - {}", exception.response().errorCode(), exception.response().description());
+            log.error(TELEGRAM_ERROR, exception.response().errorCode(), exception.response().description());
         } else {
-            log.error("Network error: {}", exception.getMessage());
+            log.error(NETWORK_ERROR, exception.getMessage());
         }
     }
 }
