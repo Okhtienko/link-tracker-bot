@@ -1,5 +1,6 @@
 package com.java.bot.command;
 
+import com.java.bot.aspect.BotCommand;
 import com.java.bot.bot.Command;
 import com.java.bot.service.StateService;
 import com.java.bot.state.State;
@@ -29,6 +30,7 @@ public class TrackCommand implements Command {
     }
 
     @Override
+    @BotCommand
     public SendMessage handle(Update update) {
         Long id = update.message().chat().id();
         stateService.setState(State.TRACK);

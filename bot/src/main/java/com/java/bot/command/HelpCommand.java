@@ -1,5 +1,6 @@
 package com.java.bot.command;
 
+import com.java.bot.aspect.BotCommand;
 import com.java.bot.bot.Command;
 import com.java.bot.handler.CommandHandler;
 import com.pengrad.telegrambot.model.Update;
@@ -34,6 +35,7 @@ public class HelpCommand implements Command {
     }
 
     @Override
+    @BotCommand
     public SendMessage handle(Update update) {
         Long id = update.message().chat().id();
         String message = buildMessage();
