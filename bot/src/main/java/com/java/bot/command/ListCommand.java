@@ -41,7 +41,7 @@ public class ListCommand implements Command {
         return new SendMessage(id, message);
     }
 
-    public String buildMessage(Long userId) {
+    private String buildMessage(Long userId) {
         Set<String> urls = linkService.gets(userId);
         return urls.isEmpty()
             ? MESSAGE
