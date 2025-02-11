@@ -1,6 +1,5 @@
 package com.java.bot.handler;
 
-import com.java.bot.bot.Bot;
 import com.java.bot.configuration.ApplicationConfig;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.TelegramException;
@@ -11,18 +10,20 @@ import com.pengrad.telegrambot.request.SetMyCommands;
 import com.pengrad.telegrambot.response.BaseResponse;
 import java.util.List;
 import java.util.Objects;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class LinkTrackerBot implements Bot {
+public class LinkTrackerBot implements com.java.bot.bot.Bot {
 
     private static final String NETWORK_ERROR = "Network error: {}";
     private static final String TELEGRAM_ERROR = "Telegram error: {} - {}";
 
-    private final TelegramBot telegramBot;
+    @Setter
+    private TelegramBot telegramBot;
     private final MessageProcessorHandler messageProcessorHandler;
 
     @Autowired
