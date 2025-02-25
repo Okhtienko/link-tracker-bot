@@ -35,6 +35,6 @@ public class CommandAspect {
         Long userId = update.message().from().id();
         String command = update.message().text();
 
-        return userService.exists(userId) || CommandUtils.belongCommand(command);
+        return userService.exists(userId) || CommandUtils.commandAllowedWithoutAuth(command);
     }
 }
