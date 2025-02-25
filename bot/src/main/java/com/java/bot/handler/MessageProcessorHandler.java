@@ -35,11 +35,11 @@ public class MessageProcessorHandler implements MessageProcessor {
     }
 
     private SendMessage handleUntrackCommand(Long id, Long userId, String url) {
-        if (!linkService.validate(url)) {
+        if (!linkService.validateUrl(url)) {
             return MessageUtils.buildMessage(id, MessageState.ERROR);
         }
 
-        if (!linkService.gets(userId).contains(url)) {
+        if (!linkService.existsUrl(url, userId)) {
             return MessageUtils.buildMessage(id, MessageState.ERROR_UNTRACK);
         }
 
@@ -50,7 +50,7 @@ public class MessageProcessorHandler implements MessageProcessor {
     }
 
     private SendMessage handleTrackCommand(Long id, Long userId, String url) {
-        if (linkService.validate(url)) {
+        if (linkService.validateUrl(url)) {
             linkService.save(url, userId);
             stateService.reset();
 
@@ -65,7 +65,7 @@ public class MessageProcessorHandler implements MessageProcessor {
         String message = update.message().text();
         Command command = commandHandler.get(message);
 
-        return command.supports(update)
+        return command.supported(update)
             ? command.handle(update)
             : MessageUtils.buildMessage(id, MessageState.UNKNOWN);
     }
