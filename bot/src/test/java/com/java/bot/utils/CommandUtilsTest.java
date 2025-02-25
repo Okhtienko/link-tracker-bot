@@ -26,20 +26,20 @@ class CommandUtilsTest {
     }
 
     @Test
-    void testBelongCommandWithValidCommand() {
+    void testCommandAllowedWithoutAuth() {
         String command = "/start";
-        assertTrue(CommandUtils.belongCommand(command));
+        assertTrue(CommandUtils.commandAllowedWithoutAuth(command));
     }
 
     @Test
-    void testBelongCommandWithInvalidCommand() {
+    void testCommandAllowedWithoutAuthWithInvalidCommand() {
         String command = "/invalid";
-        assertFalse(CommandUtils.belongCommand(command));
+        assertFalse(CommandUtils.commandAllowedWithoutAuth(command));
     }
 
     @Test
-    void testBelongCommandWithEmptyCommand() {
+    void testCommandAllowedWithoutAuthWithEmptyCommand() {
         String command = "";
-        assertFalse(CommandUtils.belongCommand(command));
+        assertFalse(CommandUtils.commandAllowedWithoutAuth(command));
     }
 }

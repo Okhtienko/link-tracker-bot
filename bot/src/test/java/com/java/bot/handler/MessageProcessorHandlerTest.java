@@ -68,7 +68,7 @@ class MessageProcessorHandlerTest {
     @Test
     void testHandleTrackCommand() {
         when(stateService.getState()).thenReturn(State.TRACK);
-        when(linkService.validate(any(String.class))).thenReturn(true);
+        when(linkService.validateUrl(any(String.class))).thenReturn(true);
 
         doNothing().when(linkService).save(any(), any());
         doNothing().when(stateService).reset();
@@ -81,7 +81,7 @@ class MessageProcessorHandlerTest {
     @Test
     void testHandleTrackCommandWithInvalidURL() {
         when(stateService.getState()).thenReturn(State.TRACK);
-        when(linkService.validate(any(String.class))).thenReturn(false);
+        when(linkService.validateUrl(any(String.class))).thenReturn(false);
 
         SendMessage response = messageProcessorHandler.process(update);
 
@@ -94,7 +94,7 @@ class MessageProcessorHandlerTest {
     @Test
     void testHandleUntrackCommandWithInvalidURL() {
         when(stateService.getState()).thenReturn(State.UNTRACK);
-        when(linkService.validate(any(String.class))).thenReturn(false);
+        when(linkService.validateUrl(any(String.class))).thenReturn(false);
 
         SendMessage response = messageProcessorHandler.process(update);
 
@@ -109,9 +109,8 @@ class MessageProcessorHandlerTest {
         Set<String> urls = mock(Set.class);
 
         when(stateService.getState()).thenReturn(State.UNTRACK);
-        when(linkService.validate(any(String.class))).thenReturn(true);
-        when(linkService.gets(any(Long.class))).thenReturn(urls);
-        when(urls.contains(any(String.class))).thenReturn(true);
+        when(linkService.validateUrl(any(String.class))).thenReturn(true);
+        when(linkService.existsUrl(any(String.class), any(Long.class))).thenReturn(true);
 
         SendMessage response = messageProcessorHandler.process(update);
 
@@ -123,9 +122,8 @@ class MessageProcessorHandlerTest {
         Set<String> urls = mock(Set.class);
 
         when(stateService.getState()).thenReturn(State.UNTRACK);
-        when(linkService.validate(any(String.class))).thenReturn(true);
-        when(linkService.gets(any(Long.class))).thenReturn(urls);
-        when(urls.contains(any(String.class))).thenReturn(false);
+        when(linkService.validateUrl(any(String.class))).thenReturn(true);
+        when(linkService.existsUrl(any(String.class), any(Long.class))).thenReturn(false);
 
         SendMessage response = messageProcessorHandler.process(update);
 
@@ -136,7 +134,7 @@ class MessageProcessorHandlerTest {
     void testHandleUnknownCommand() {
         when(stateService.getState()).thenReturn(State.COMMAND);
         when(commandHandler.get(any(String.class))).thenReturn(command);
-        when(command.supports(any(Update.class))).thenReturn(false);
+        when(command.supported(any(Update.class))).thenReturn(false);
 
         SendMessage response = messageProcessorHandler.process(update);
 
@@ -150,13 +148,13 @@ class MessageProcessorHandlerTest {
     void testHandleCommandWithValidCommand() {
         when(stateService.getState()).thenReturn(State.COMMAND);
         when(commandHandler.get(any(String.class))).thenReturn(command);
-        when(command.supports(any(Update.class))).thenReturn(true);
+        when(command.supported(any(Update.class))).thenReturn(true);
         when(command.handle(update)).thenReturn(mock(SendMessage.class));
 
         SendMessage response = messageProcessorHandler.process(update);
 
         assertNotNull(response);
-        verify(command).supports(update);
+        verify(command).supported(update);
         verify(command).handle(update);
     }
 }

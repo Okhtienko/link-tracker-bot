@@ -94,19 +94,19 @@ class LinkServiceTest {
     @Test
     void testValidateUrl() {
         String url = "https://github.com/sanyarnd/tinkoff-java-course-2023/";
-        assertTrue(linkService.validate(url));
+        assertTrue(linkService.validateUrl(url));
     }
 
     @Test
     void testNotValidateUrl() {
         String url = "https://invalid.com/";
-        assertFalse(linkService.validate(url));
+        assertFalse(linkService.validateUrl(url));
     }
 
     @Test
     void testValidateUrlWithEmpty() {
         String url = "";
-        assertFalse(linkService.validate(url));
+        assertFalse(linkService.validateUrl(url));
     }
 
     @Test
@@ -120,6 +120,28 @@ class LinkServiceTest {
 
         assertEquals(urls, response);
         verify(links).getOrDefault(id, new HashSet<>());
+    }
+
+    @Test
+    void testExistsUrl() {
+        Long id = 123L;
+        Set<String> urls = buildUrls();
+        String url = "https://github.com/sanyarnd/tinkoff-java-course-2023/";
+
+        when(links.get(id)).thenReturn(urls);
+
+        assertTrue(linkService.existsUrl(url, id));
+    }
+
+    @Test
+    void testNotExistsUrl() {
+        Long id = 123L;
+        Set<String> urls = buildUrls();
+        String url = "https://github.com/sanyarnd/tinkoff-java-course-2023/1";
+
+        when(links.get(id)).thenReturn(urls);
+
+        assertFalse(linkService.existsUrl(url, id));
     }
 
     @Test

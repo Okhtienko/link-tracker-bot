@@ -23,10 +23,10 @@ class CommandTest {
     private BotCommand command;
 
     @Test
-    void testSupports() {
+    void testSupported() {
         when(update.message()).thenReturn(message);
         when(update.message().text()).thenReturn("/start");
 
-        assertTrue(command.supports(update));
+        assertTrue(command.supported(update));
     }
 }

@@ -72,7 +72,7 @@ class CommandAspectTest {
         when(userService.exists(321L)).thenReturn(false);
         when(joinPoint.getArgs()).thenReturn(new Object[]{update});
 
-        mockedCommandUtils.when(() -> CommandUtils.belongCommand("/unknown")).thenReturn(false);
+        mockedCommandUtils.when(() -> CommandUtils.commandAllowedWithoutAuth("/unknown")).thenReturn(false);
 
         SendMessage result = (SendMessage) commandAspect.checkPermission(joinPoint);
 
@@ -87,7 +87,7 @@ class CommandAspectTest {
         when(joinPoint.getArgs()).thenReturn(new Object[]{update});
         when(joinPoint.proceed()).thenReturn(true);
 
-        mockedCommandUtils.when(() -> CommandUtils.belongCommand("/start")).thenReturn(true);
+        mockedCommandUtils.when(() -> CommandUtils.commandAllowedWithoutAuth("/start")).thenReturn(true);
 
         assertTrue((Boolean) commandAspect.checkPermission(joinPoint));
         verify(joinPoint).proceed();
@@ -100,7 +100,7 @@ class CommandAspectTest {
         when(joinPoint.getArgs()).thenReturn(new Object[]{update});
         when(joinPoint.proceed()).thenThrow(new RuntimeException());
 
-        mockedCommandUtils.when(() -> CommandUtils.belongCommand("/start")).thenReturn(true);
+        mockedCommandUtils.when(() -> CommandUtils.commandAllowedWithoutAuth("/start")).thenReturn(true);
 
         assertThrows(RuntimeException.class, () -> commandAspect.checkPermission(joinPoint));
     }
