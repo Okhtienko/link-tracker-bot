@@ -13,7 +13,7 @@ public interface Command {
 
     SendMessage handle(Update update);
 
-    default boolean supports(Update update) {
+    default boolean supported(Update update) {
         return Optional.ofNullable(update.message())
             .map(Message::text)
             .filter(text -> command().equalsIgnoreCase(text))
