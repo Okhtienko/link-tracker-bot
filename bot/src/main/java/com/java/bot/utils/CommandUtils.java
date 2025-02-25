@@ -10,7 +10,7 @@ public final class CommandUtils {
         throw new UnsupportedOperationException("Utility class cannot be instantiated");
     }
 
-    public static boolean belongCommand(String command) {
+    public static boolean commandAllowedWithoutAuth(String command) {
         return COMMANDS.contains(command);
     }
 }
