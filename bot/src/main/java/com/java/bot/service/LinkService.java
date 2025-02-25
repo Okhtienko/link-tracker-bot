@@ -15,11 +15,16 @@ public class LinkService implements LinkProcessor {
     private final Map<Long, Set<String>> links;
 
     @Override
-    public boolean validate(String url) {
+    public boolean validateUrl(String url) {
         return Stream.of(
             url.matches("^https?://github.com(/.*)?$"),
             url.matches("^https?://stackoverflow.com(/.*)?$")
         ).anyMatch(Boolean::valueOf);
+    }
+
+    @Override
+    public boolean existsUrl(String url, Long id) {
+        return links.get(id).contains(url);
     }
 
     @Override

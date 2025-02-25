@@ -4,7 +4,9 @@ import java.util.Set;
 
 public interface LinkProcessor {
 
-    boolean validate(String url);
+    boolean validateUrl(String url);
+
+    boolean existsUrl(String url, Long id);
 
     void remove(String url, Long id);
 
